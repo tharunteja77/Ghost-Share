@@ -1,0 +1,78 @@
+* {
+  margin: 0;
+  padding: 0;
+  color: white;
+}
+body {
+  font-family: Arial, sans-serif;
+  background-color: black;
+}
+
+.container {
+  width: 300px;
+  margin: 0 auto;
+  padding: 20px;
+  background-color: black;
+  border-radius: 5px;
+  box-shadow: 0 0 10px #36dd95;
+  margin-top: 100px;
+}
+
+input[type="text"],
+input[type="password"] {
+  width: 100%;
+  padding: 10px;
+  margin-bottom: 20px;
+  display: inline-block;
+  border: 1px solid #ccc;
+  border-radius: 4px;
+  color: black;
+  box-sizing: border-box;
+}
+
+button {
+  width: 100%;
+  padding: 10px;
+  margin: 10px 0px 10px 0px;
+  display: inline-block;
+  border: 1px solid #ccc;
+  border-radius: 4px;
+  box-sizing: border-box;
+  background-color: black;
+  border: 1px solid #ccc;
+  cursor: pointer;
+}
+
+button:hover {
+  background-color: #161515;
+}
+
+#alert {
+  border: 1px solid white;
+  background-color: #161515;
+  padding: 8px;
+  display: none;
+}
+.logo {
+  display: flex;
+  height: 60px;
+  justify-content: space-between;
+}
+#Dash {
+  height: 40px;
+  width: 100px;
+  border: 1px solid white;
+  border-radius: 20px;
+  margin: 10px 40px 0px 10px;
+  display: grid;
+  place-items: center;
+  cursor: pointer;
+}
+#signup_redirect {
+  text-decoration: none;
+  color: #36dd95;
+}
+#signup-mark {
+  margin: 10px 0px 5px 0px;
+  text-align: center;
+}
