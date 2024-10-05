@@ -32,7 +32,7 @@ cd ghost-share
    docker-compose up --build
 ```
 5. Access the application: Open your web browser and go to http://localhost:8000.
-6.Use this command in terminal to run GHOST SHARE:
+6. Use this command in terminal to run GHOST SHARE:
   ```bash
    uvicorn main:app --reload
 ```
