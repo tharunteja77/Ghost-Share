@@ -32,7 +32,13 @@ cd ghost-share
    docker-compose up --build
 ```
 5. Access the application: Open your web browser and go to http://localhost:8000.
+6.Use this command in terminal to run GHOST SHARE:
+  ```bash
+   uvicorn main:app --reload
+```
+   
 ## Usage
+* First, sign up for ' Ghost Share ' to create your credentials. Once registered, you can log in using those credentials.
 * Upload Files: Go to the upload page, select your file, and upload it securely.
 * Download Files: Enter the provided download link to retrieve your file anonymously.
 * Authentication: Register and log in to access the platform’s features securely.
