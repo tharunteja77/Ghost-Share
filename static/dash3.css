@@ -48,8 +48,11 @@ nav .login-signup #Signup {
   align-items: center;
   justify-content: center;
   border: 0.5px solid white;
+  transition: ease-in-out 0.3s;
 }
-
+#Signup:hover{
+  transform:scale(1.1);
+}
 .modal {
   display: none; /* Hidden by default */
   position: fixed; /* Stay in place */
@@ -138,8 +141,11 @@ nav .login-signup #Login {
   align-items: center;
   justify-content: center;
   border: 0.5px solid white;
+  transition: ease-in-out 0.3s;
 }
-
+#Login:hover {
+  transform: scale(1.1);
+}
 .modal-2 {
   display: none; /* Hidden by default */
   position: fixed; /* Stay in place */
