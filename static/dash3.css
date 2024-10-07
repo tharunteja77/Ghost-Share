@@ -30,8 +30,7 @@ nav .logo:hover {
   transform: scale(1.2);
 }
 nav .login-signup {
-  height: 8vh;
-  width: 14vw;
+  padding-right:10px;
   display: flex;
   align-items: center;
   justify-content: center;
