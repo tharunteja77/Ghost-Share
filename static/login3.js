@@ -6,7 +6,7 @@ document.addEventListener("DOMContentLoaded", function() {
     var login2signup = document.getElementById("signup_redirect");
      login2signup.onclick = function() {  
             window.location.href = "/signup";
-console.log("hi");
+
     };
 });
 
