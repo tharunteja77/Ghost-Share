@@ -44,5 +44,5 @@ cd ghost-share
 * Authentication: Register and log in to access the platform’s features securely.
 
 
-##Suggestion
-*If docker doesn't work properly, then setup a virtual environment and install all the packages in requirements.txt file.
+## Suggestion
+* If docker doesn't work properly, then setup a virtual environment and install all the packages in requirements.txt file.
