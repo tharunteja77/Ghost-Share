@@ -42,3 +42,7 @@ cd ghost-share
 * Upload Files: Go to the upload page, select your file, and upload it securely.
 * Download Files: Enter the provided download link to retrieve your file anonymously.
 * Authentication: Register and log in to access the platform’s features securely.
+
+
+##Suggestion
+*If docker doesn't work properly, then setup a virtual environment and install all the packages in requirements.txt file.
