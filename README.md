@@ -21,7 +21,7 @@ Ghost Share is an anonymous file-sharing platform designed to prioritize user pr
 ### Steps
 1. Clone the repository:
 ```bash
-git clone https://github.com/yourusername/ghost-share.git
+git clone https://github.com/tharunteja77/Ghost-Share
 ```
 2. Navigate to the project directory:
 ```bash
