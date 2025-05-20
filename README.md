@@ -27,12 +27,8 @@ git clone https://github.com/tharunteja77/Ghost-Share
 ```bash
 cd ghost-share
 ```
-4. Build and run the Docker containers
-```bash
-   docker-compose up --build
-```
-5. Access the application: Open your web browser and go to http://localhost:8000.
-6. Use this command in terminal to run GHOST SHARE: ( Only if you have imported all the required modules in requirement.txt )
+3. Access the application: Open your web browser and go to http://localhost:8000.
+4. Use this command in terminal to run GHOST SHARE: ( Only if you have imported all the required modules in requirement.txt )
   ```bash
    uvicorn main:app --reload
 ```
