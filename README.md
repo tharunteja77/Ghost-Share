@@ -16,7 +16,6 @@ Ghost Share is an anonymous file-sharing platform designed to prioritize user pr
 * Authentication: JWT, Cookies
 ## Installation
 ### Prerequisites
-* Docker installed on your machine.
 * MongoDB running locally or accessible remotely.
 ### Steps
 1. Clone the repository:
@@ -40,5 +39,3 @@ cd ghost-share
 * Authentication: Register and log in to access the platform’s features securely.
 
 
-## Suggestion
-* If docker doesn't work properly, then setup a virtual environment and install all the packages in requirements.txt file.
