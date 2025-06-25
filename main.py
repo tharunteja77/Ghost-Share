@@ -3,15 +3,12 @@ from fastapi import FastAPI, Request, Form, Depends, HTTPException, UploadFile, 
 from fastapi.middleware.cors import CORSMiddleware
 from fastapi.staticfiles import StaticFiles
 from fastapi.templating import Jinja2Templates
-from fastapi.responses import RedirectResponse, JSONResponse
-import jwt 
-from jwt import PyJWTError as JWTError 
+from fastapi.responses import RedirectResponse, JSONResponse 
 from pymongo import MongoClient
 from pydantic import BaseModel
 from passlib.context import CryptContext
 from gridfs import GridFS
-# from jose import JWTError
-# from jose import jwt
+from jose import JWTError,jwt
 from datetime import datetime, timedelta
 from typing import Optional
 
@@ -171,5 +168,5 @@ async def delete_file(filename: str, filecode: str, current_user: User = Depends
 @app.get("/userdata")
 async def userdata(current_user: User = Depends(get_current_user)):
     data = user_collection.find_one({"username": current_user.username})
-    a=data['file']
+    a = data.get('file', None)
     return a

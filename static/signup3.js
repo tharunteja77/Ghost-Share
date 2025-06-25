@@ -6,10 +6,13 @@ async function checkUsername(event) {
         method: 'POST',
         body: formData      
     });
-    alert("Sign Up successful !!!, You can now log in into GHOST SHARE...");
+
     const result = await response.json();
     if (result.exists) {
         alert("Username already exists!");
+    }else {
+        alert("Sign Up successful !!!, You can now log in into GHOST SHARE...");
+        window.location.href = "/login"; 
     }
 }
 
