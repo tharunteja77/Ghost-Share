@@ -24,7 +24,7 @@ git clone https://github.com/tharunteja77/Ghost-Share
 ```
 2. Navigate to the project directory:
 ```bash
-cd ghost-share
+cd Ghost-share
 ```
 3. Access the application: Open your web browser and go to http://localhost:8000.
 4. Use this command in terminal to run GHOST SHARE: ( Only if you have imported all the required modules in requirement.txt )
