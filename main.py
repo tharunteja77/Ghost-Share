@@ -7,7 +7,6 @@ from fastapi.responses import RedirectResponse, JSONResponse
 from pymongo import MongoClient
 from pydantic import BaseModel
 from passlib.context import CryptContext
-from gridfs import GridFS
 from jose import JWTError,jwt
 from datetime import datetime, timedelta
 from typing import Optional
@@ -16,7 +15,7 @@ import os
 import cloudinary
 import cloudinary.uploader
 import mimetypes
-from bson import ObjectId
+
 
 
 app = FastAPI()
@@ -38,9 +37,7 @@ load_dotenv()
 client = MongoClient(os.getenv("MONGO_URI"))
 db = client[os.getenv("MONGO_USERDB")]
 user_collection = db.users
-fs = GridFS(db, collection="files")
-fs_chunks = db['files.chunks']
-fs_files = db['files.files']
+
 
 
 SECRET_KEY = "your_secret_key"
