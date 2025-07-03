@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>GHOST SHARE-Login</title>
+    <link rel="stylesheet" href="/static/Login.css" />
+    <script
+      type="text/javascript"
+      src="{{ url_for('static', path='/Login.js') }}"
+    ></script>
+  </head>
+  <body>
+    <div class="nav">
+      <div class="logo">
+        <a href="#">
+          <img
+            src="/static/logo.png"
+            alt="logo "
+            style="height: 60px; width: 120px; padding: 2px 0px 0px 10px"
+          />
+        </a>
+        <div id="Dash">Back</div>
+      </div>
+    </div>
+    <div class="container">
+      <h2 style="margin-bottom: 20px">Login:</h2>
+      <form id="loginForm" onsubmit="Login(event)">
+        <label for="username">Username :</label>
+        <input type="text" id="username-login" name="username" required /><br />
+
+        <label for="password">Password :</label>
+        <input
+          type="password"
+          id="password-login"
+          name="password"
+          required
+        /><br />
+
+        <button type="submit" id="loginButton">Login</button>
+      </form>
+      <p id="signup-mark">
+        Don't have an account? <a href="#" id="signup_redirect">signup</a>
+      </p>
+      <div id="alert">
+        Username or Password is incorrect ! Please check your credentials..
+      </div>
+    </div>
+    <!-- <script src="/static/login.js"></script> -->
+    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@10"></script>
+  </body>
+</html>

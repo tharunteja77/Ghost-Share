@@ -100,11 +100,11 @@ async def get_current_user(token: str = Cookie(None)):
 
 @app.get("/")
 async def home(request: Request):
-    return templates.TemplateResponse("dash.html", {"request": request})
+    return templates.TemplateResponse("Dash.html", {"request": request})
 
 @app.get("/login")
 async def new_page(request: Request):
-    return templates.TemplateResponse("login3.html", {"request": request})
+    return templates.TemplateResponse("Login.html", {"request": request})
 
 @app.post("/login")
 async def login(response: Response, username: str = Form(...), password: str = Form(...)):
@@ -121,11 +121,11 @@ async def login(response: Response, username: str = Form(...), password: str = F
 
 @app.get("/dash")
 async def new_page(request: Request):
-    return templates.TemplateResponse("dash.html", {"request": request})
+    return templates.TemplateResponse("Dash.html", {"request": request})
 
 @app.get("/signup")
 async def new_page(request: Request):
-    return templates.TemplateResponse("signup3.html", {"request": request})
+    return templates.TemplateResponse("Signup.html", {"request": request})
 
 @app.post("/signup")
 async def signup(request: Request, username: str = Form(...), password: str = Form(...)):
@@ -146,7 +146,7 @@ async def logout(response: Response):
 
 @app.get("/home")
 async def home(request: Request, current_user: User = Depends(get_current_user)):
-    return templates.TemplateResponse("HomePage2.html", {"request": request, "username": current_user.username})
+    return templates.TemplateResponse("MainPage.html", {"request": request, "username": current_user.username})
 
 
 @app.get("/userdata")
