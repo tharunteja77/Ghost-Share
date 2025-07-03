@@ -1,0 +1,177 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>GHOST SHARE</title>
+    <link
+      rel="stylesheet"
+      type="text/css"
+      href="{{ url_for('static', path='/Dash.css') }}"
+    />
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Hind:wght@300;400;500;600;700&display=swap"
+      rel="stylesheet"
+    />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Hind:wght@300;400;500;600;700&family=Nosifer&family=Roboto:ital,wght@0,100;0,300;0,400;0,500;0,700;0,900;1,100;1,300;1,400;1,500;1,700;1,900&display=swap"
+      rel="stylesheet"
+    />
+    <script
+      type="text/javascript"
+      src="{{ url_for('static', path='/Dash.js') }}"
+    ></script>
+  </head>
+  <body>
+    <header>
+      <nav>
+        <div class="logo">
+          <a href="#">
+            <img
+              src="/static/logo1.png"
+              alt="logo "
+              style="height: 60px; width: 120px; padding: 2px 0px 0px 10px"
+            />
+          </a>
+        </div>
+        <div class="login-signup">
+          <div id="Signup">Sign Up</div>
+
+          <div id="Login">Login</div>
+        </div>
+      </nav>
+    </header>
+    <video src="/static/fog_effect.mp4" autoplay muted></video>
+    <div class="box">
+      <section>
+        <div class="section-1"><h1 class="head">GHOST SHARE</h1></div>
+        <div class="section-2">
+          <div class="div1 autoShow-bt"><h1>Welcome to GHOST SHARE</h1></div>
+          <div class="div2 card autoShow-bt">
+            <aside class="div2-aside">
+              <p class="card-heading">About</p>
+            </aside>
+            <section class="div2-section">
+              <ul>
+                <li style="padding: 0 2px 4px 4px">
+                  Ghost Share is the ultimate platform for anonymous file
+                  sharing. Upload files instantly, generate secure download
+                  links, and access them from anywhere—without ever revealing
+                  your identity.
+                </li>
+                <li style="padding: 0 2px 4px 4px">
+                  With Ghost Share, you can store and share any type of file,
+                  from documents to images, videos, and more. Enjoy the freedom
+                  of universal access to your content, no matter where you are.
+                </li>
+                <li style="padding: 0 0px 4px 4px">
+                  Link sharing is flexible and convenient. Distribute your
+                  download links through email, messaging apps, or social media
+                  however you prefer. Your files are always just a click away.
+                </li>
+              </ul>
+            </section>
+          </div>
+          <div class="div3 autoshow-lr">
+            <div class="div3-inner">
+              <div class="div3-aside">
+                <p class="card-heading" style="padding: 4px">Features</p>
+              </div>
+              <section class="div3-section">
+                <ul class="features-list-div3">
+                  <li>🔒 100% anonymous file sharing</li>
+                  <li>🚀 Fast, one-click file uploads</li>
+                  <li>🌐 Shareable links for any platform</li>
+                  <li>🔍 Download activity invisible to everyone</li>
+                  <li>📦 Supports any files</li>
+                </ul>
+              </section>
+            </div>
+          </div>
+          <div class="div4 autoshow-tb">
+            <div class="div4-inner">
+              <div class="div4-aside">
+                <p class="card-heading" style="padding: 4px">How to Use</p>
+              </div>
+              <section class="div4-section">
+                <ul class="features-list-div4">
+                  <li>📁 Choose a file up to 10MB</li>
+                  <li>☁️ Click “Upload” and wait for the link</li>
+                  <li>🔗 Copy the secure link provided</li>
+                  <li>📤 Share the link anywhere</li>
+                  <li>🧨 Set auto-expiry or password (optional)</li>
+                </ul>
+              </section>
+            </div>
+          </div>
+          <div class="div5 autoshow-rl">
+            <div class="div5-inner">
+              <div class="div5-aside">
+                <p class="card-heading" style="padding: 4px">User Policy</p>
+              </div>
+              <section class="div5-section">
+                <ul class="policy-list-div5">
+                  <li>🚫 No illegal uploads allowed</li>
+                  <li>⏳ Links will auto-expire</li>
+                  <li>🕵️ No tracking of shared links</li>
+                  <li>📤 Users are liable for their uploads</li>
+                  <li>🛡️ Abuse detection systems protect the platform</li>
+                </ul>
+              </section>
+            </div>
+          </div>
+        </div>
+      </section>
+    </div>
+    <div class="blank_zone">
+      <div class="marquee-container">
+        <div class="marquee-text">
+          <img
+            src="/static/logo1.png"
+            alt="logo "
+            style="width: 120px; padding: 2px 0px 0px 10px"
+          />
+          Welcome to Ghost Share — your secure and anonymous file sharing hub!
+          || 🔐 Upload ant type of file || No file tracking || Share file links
+          anywhere🌐, anytime! || Files are uploaded to Cloudinary and metadata
+          is stored in MongoDB for now || Cloudinary offers fast media delivery
+          but has upload limits, file size limits and storage costs || Ghost
+          Share is running on a free tier of Cloudinary, so please be patient
+          with the upload speed and file size limit, it will be improved in the
+          future || Regards Ghost Share
+          <img
+            src="/static/logo1.png"
+            alt="logo "
+            style="height: 60px; width: 120px; padding: 2px 0px 0px 10px"
+          />
+        </div>
+      </div>
+    </div>
+    <footer
+      style="
+        background-color: #222;
+        color: white;
+        text-align: center;
+        padding: 20px;
+      "
+    >
+      <p>&copy; 2025 Ghost Share. All rights reserved.</p>
+      <div style="margin-top: 10px">
+        <a href="#" style="color: #ccc; margin: 0 10px; text-decoration: none"
+          >Home</a
+        >
+        <a href="#" style="color: #ccc; margin: 0 10px; text-decoration: none"
+          >About</a
+        >
+        <a href="#" style="color: #ccc; margin: 0 10px; text-decoration: none"
+          >Contact</a
+        >
+      </div>
+    </footer>
+
+    <script src="/static/dash.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@10"></script>
+  </body>
+</html>

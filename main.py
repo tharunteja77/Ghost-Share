@@ -100,7 +100,7 @@ async def get_current_user(token: str = Cookie(None)):
 
 @app.get("/")
 async def home(request: Request):
-    return templates.TemplateResponse("Dash.html", {"request": request})
+    return templates.TemplateResponse("LandingPage.html", {"request": request})
 
 @app.get("/login")
 async def new_page(request: Request):
@@ -121,7 +121,7 @@ async def login(response: Response, username: str = Form(...), password: str = F
 
 @app.get("/dash")
 async def new_page(request: Request):
-    return templates.TemplateResponse("Dash.html", {"request": request})
+    return templates.TemplateResponse("LandingPage.html", {"request": request})
 
 @app.get("/signup")
 async def new_page(request: Request):
