@@ -1,5 +1,5 @@
 import uuid,json
-from fastapi import FastAPI, Request, Form, Depends, HTTPException, UploadFile, File, Cookie, Response
+from fastapi import FastAPI, Request, Form, Depends, HTTPException, UploadFile, File, Cookie, Response, APIRouter
 from fastapi.middleware.cors import CORSMiddleware
 from fastapi.staticfiles import StaticFiles
 from fastapi.templating import Jinja2Templates
@@ -11,6 +11,13 @@ from gridfs import GridFS
 from jose import JWTError,jwt
 from datetime import datetime, timedelta
 from typing import Optional
+from dotenv import load_dotenv
+import os
+import cloudinary
+import cloudinary.uploader
+import mimetypes
+from bson import ObjectId
+
 
 app = FastAPI()
 
@@ -26,16 +33,25 @@ app.mount("/static", StaticFiles(directory="static"), name="static")
 
 templates = Jinja2Templates(directory="templates")
 
-client = MongoClient('mongodb://localhost:27017')
-db = client.user_database
+
+load_dotenv()
+client = MongoClient(os.getenv("MONGO_URI"))
+db = client[os.getenv("MONGO_USERDB")]
 user_collection = db.users
 fs = GridFS(db, collection="files")
 fs_chunks = db['files.chunks']
 fs_files = db['files.files']
 
+
 SECRET_KEY = "your_secret_key"
 ALGORITHM = "HS256"
 ACCESS_TOKEN_EXPIRE_MINUTES = 30
+
+cloudinary.config(
+    cloud_name=os.getenv("CLOUDINARY_CLOUD_NAME"),
+    api_key=os.getenv("CLOUDINARY_API_KEY"),
+    api_secret=os.getenv("CLOUDINARY_API_SECRET")
+)
 
 pwd_context = CryptContext(schemes=["bcrypt"], deprecated="auto")
 
@@ -110,8 +126,6 @@ async def login(response: Response, username: str = Form(...), password: str = F
 async def new_page(request: Request):
     return templates.TemplateResponse("dash.html", {"request": request})
 
-
-
 @app.get("/signup")
 async def new_page(request: Request):
     return templates.TemplateResponse("signup3.html", {"request": request})
@@ -137,36 +151,90 @@ async def logout(response: Response):
 async def home(request: Request, current_user: User = Depends(get_current_user)):
     return templates.TemplateResponse("HomePage2.html", {"request": request, "username": current_user.username})
 
-@app.get("/download/{filecode}")
-async def download_file(filecode: str):
-    file_data = fs_files.find_one({"file_code": filecode})
-    if not file_data:
-        raise HTTPException(status_code=404, detail="File not found")
-    data = fs.get(file_data['_id'])
-    return Response(content=data.read(), media_type=file_data['contentType'], headers={
-        "Content-Disposition": f"attachment; filename={file_data['filename']}"
-    })
-
-@app.post("/upload")
-async def upload_file( file: UploadFile = File(...), current_user: User = Depends(get_current_user)):
-    num = str(uuid.uuid4())
-    print(file.content_type)
-    print(file.filename)
-    update = {"$push": {"file": {num: file.filename,"num":num , "filename":file.filename, "file_size": file.size,"time":str(datetime.utcnow()),"file_type":file.content_type}}}
-    user_collection.update_one({"username": current_user.username}, update)
-    fs.put(file.file, filename=file.filename, content_type=file.content_type, username=current_user.username, file_code=num)
-    return RedirectResponse(url="/home",status_code=303)
-
-@app.post("/delete/{filename}/{filecode}")
-async def delete_file(filename: str, filecode: str, current_user: User = Depends(get_current_user)):
-    file_id = fs_files.find_one_and_delete({"file_code": filecode})
-    fs_chunks.delete_many({"files_id": file_id["_id"]})
-    update = {"$pull": {"file": {filecode: filename}}}
-    user_collection.update_one({"username": current_user.username}, update)
-    return {"detail": "File deleted successfully"}
 
 @app.get("/userdata")
 async def userdata(current_user: User = Depends(get_current_user)):
     data = user_collection.find_one({"username": current_user.username})
     a = data.get('file', None)
     return a
+
+@app.post("/upload")
+async def upload_file(file: UploadFile = File(...), current_user: User = Depends(get_current_user)):
+    contents = await file.read()
+    mime_type = file.content_type
+
+    if mime_type.startswith("image/"):
+        resource_type = "image"
+    elif mime_type.startswith("video/"):
+        resource_type = "video"
+    else:
+        resource_type = "raw"
+
+    file_ext = mimetypes.guess_extension(mime_type) or ''
+    file_uuid = str(uuid.uuid4())  # This will be used as public_id
+
+    upload_result = cloudinary.uploader.upload(
+        contents,
+        resource_type=resource_type,
+        public_id=file_uuid,       #  Set file_uuid as predictable public_id
+        use_filename=False,        #  Do not use original filename as public_id
+        unique_filename=False,     #  Prevent random hashes in public_id
+        overwrite=True,            #  Ensure re-uploads overwrite same ID
+        timeout=60,
+    )
+
+    cloudinary_url = upload_result.get("secure_url")
+    cloudinary_url = cloudinary_url.replace("/upload/", "/upload/fl_attachment/")
+
+    file_info = {               
+        "filename": file.filename,
+        "file_type": mime_type,
+        "file_size": len(contents),
+        "file_code": file_uuid, 
+        "cloudinary_url": cloudinary_url,
+        "resource_type": resource_type,
+        "time": str(datetime.utcnow())
+    }
+
+    user_collection.update_one(
+        {"username": current_user.username},
+        {"$push": {"file": file_info}}
+    )
+
+    return RedirectResponse(url="/home", status_code=303)
+
+@app.post("/delete/{filename}/{file_code}")
+async def delete_file(filename: str, file_code: str, current_user: User = Depends(get_current_user)):
+    try:
+        # Fetch user's file entry to get resource_type
+        user_data = user_collection.find_one({"username": current_user.username})
+        user_files = user_data.get("file", [])
+
+        target_file = next((f for f in user_files if f["file_code"] == file_code), None)
+
+        if not target_file:
+            raise HTTPException(status_code=404, detail="File not found in MongoDB")
+
+        resource_type = target_file.get("resource_type", "raw")
+
+        # Delete from Cloudinary
+        result = cloudinary.uploader.destroy(file_code, resource_type=resource_type)
+        print("Cloudinary deletion result:", result)
+
+        if result.get("result") != "ok":
+            raise HTTPException(status_code=500, detail=f"Cloudinary deletion failed: {result.get('result')}")
+
+        # Delete from MongoDB
+        update = {"$pull": {"file": {"file_code": file_code}}}
+        result_db = user_collection.update_one({"username": current_user.username}, update)
+
+        if result_db.modified_count == 0:
+            raise HTTPException(status_code=404, detail="File could not be deleted from MongoDB")
+
+        return {"detail": "File deleted from Cloudinary and MongoDB"}
+        
+
+    except Exception as e:
+        print("Exception:", str(e))
+        raise HTTPException(status_code=500, detail=str(e))
+

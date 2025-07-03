@@ -6,12 +6,26 @@
     <title>GHOST SHARE</title>
     <link
       rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css"
+    />
+
+    <link
+      rel="stylesheet"
       type="text/css"
-      href="{{ url_for('static', path='/Homepage4.css') }}"
+      href="{{ url_for('static', path='/Homepage7.css') }}"
+    />
+    <link
+      rel="stylesheet"
+      type="text/css"
+      href="{{ url_for('static', path='/toast.css') }}"
     />
     <script
       type="text/javascript"
-      src="{{ url_for('static', path='/Homepage4.js') }}"
+      src="{{ url_for('static', path='/Homepage7.js') }}"
+    ></script>
+    <script
+      type="text/javascript"
+      src="{{ url_for('static', path='/toast.js') }}"
     ></script>
   </head>
   <body>
@@ -64,5 +78,10 @@
       </div>
     </div>
     <div id="sharing"><div id="share_box"></div></div>
+    <div class="blank_zone"></div>
   </body>
 </html>
+
+<!-- <button onclick="toast.success('Operation was successful!')">
+  Show Success Toast
+</button> -->
