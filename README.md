@@ -11,7 +11,6 @@ Ghost Share is an anonymous file-sharing platform designed to prioritize user pr
 ## Technologies Used
 * Backend: Python (FastAPI)
 * Database: MongoDB
-* Containerization: Docker
 * Frontend: HTML, CSS, JavaScript
 * Authentication: JWT, Cookies
 ## Installation
